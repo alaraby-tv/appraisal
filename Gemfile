@@ -19,8 +19,11 @@ gem 'bootstrap-generators', '~> 3.3.4'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+gem 'capistrano', '~> 3.11'
+gem 'capistrano-rails', '~> 1.4'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -38,8 +41,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'capistrano', '~> 3.11', require: false
-  gem 'capistrano-rails', '~> 1.4', require: false
 end
 
 
