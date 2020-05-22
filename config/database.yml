@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: appraisal_production
-  username: appraisal
+  username: deploy
   password: <%= ENV['APPRAISAL_DATABASE_PASSWORD'] %>
