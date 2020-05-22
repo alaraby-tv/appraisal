@@ -6,7 +6,7 @@ ruby '2.6.6'
 
 gem 'rails', '~> 5.2.4', '>= 5.2.4.1'
 gem 'pg', '>= 0.18', '< 2.0'
-# gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 
@@ -19,11 +19,6 @@ gem 'bootstrap-generators', '~> 3.3.4'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
-gem 'capistrano-passenger', '~> 0.2.0'
-gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
-gem 'capistrano', '~> 3.11'
-gem 'capistrano-rails', '~> 1.4'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
