@@ -6,6 +6,7 @@ server '192.168.1.32', port: 22, roles: [:web, :app, :db], primary: true
 set :application, "appraisal"
 set :repo_url, "git@github.com:alaraby-tv/appraisal.git"
 set :user, 'deploy'
+set :linked_files, %w{config/master.key}
 set :puma_threads, [4, 16]
 set :puma_workers, 0
 
