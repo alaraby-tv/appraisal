@@ -1,6 +1,5 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin
 
   # GET /groups
   # GET /groups.json
@@ -70,6 +69,6 @@ class GroupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(:name)
+      params.require(:group).permit(:name, :total_percentage)
     end
 end
