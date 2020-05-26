@@ -1,4 +1,4 @@
-class Score < ApplicationRecord
+class Evaluation < ApplicationRecord
   belongs_to :user
   belongs_to :objective
 end
