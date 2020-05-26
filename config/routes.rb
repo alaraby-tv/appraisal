@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :groups
+  resources :sections
+  resources :groups do
+    resources :sections do
+      resources :objectives
+    end
+  end
   root 'home#index'
   devise_for :users, skip: [:sessions, :registrations]
   devise_scope :user do

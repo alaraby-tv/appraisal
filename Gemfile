@@ -19,6 +19,7 @@ gem 'bootstrap-generators', '~> 3.3.4'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'devise-bootstrap-views', '~> 1.0'
+gem 'record_tag_helper', '~> 1.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
