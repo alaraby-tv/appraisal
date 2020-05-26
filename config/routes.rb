@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :sections
   resources :groups do
     resources :sections do
       resources :objectives
