@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :users
+      resources :evaluations
+      resources :groups
+      resources :objectives
+      resources :sections
+
+      root to: "users#index"
+    end
   resources :groups do
     resources :sections do
       resources :objectives
