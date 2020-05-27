@@ -1,10 +1,11 @@
 class SectionsController < ApplicationController
+  before_action :set_group
   before_action :set_section, only: [:show, :edit, :update, :destroy]
 
   # GET /sections
   # GET /sections.json
   def index
-    @sections = Section.all
+    @sections = @group.sections
   end
 
   # GET /sections/1
@@ -14,7 +15,7 @@ class SectionsController < ApplicationController
 
   # GET /sections/new
   def new
-    @section = Section.new
+    @section = @group.sections.build
   end
 
   # GET /sections/1/edit
@@ -24,11 +25,11 @@ class SectionsController < ApplicationController
   # POST /sections
   # POST /sections.json
   def create
-    @section = Section.new(section_params)
+    @section = @group.sections.build(section_params)
 
     respond_to do |format|
       if @section.save
-        format.html { redirect_to @section, notice: 'Section was successfully created.' }
+        format.html { redirect_to @group, notice: 'Section was successfully created.' }
         format.json { render :show, status: :created, location: @section }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class SectionsController < ApplicationController
   def update
     respond_to do |format|
       if @section.update(section_params)
-        format.html { redirect_to @section, notice: 'Section was successfully updated.' }
+        format.html { redirect_to @group, notice: 'Section was successfully updated.' }
         format.json { render :show, status: :ok, location: @section }
       else
         format.html { render :edit }
@@ -56,19 +57,24 @@ class SectionsController < ApplicationController
   def destroy
     @section.destroy
     respond_to do |format|
-      format.html { redirect_to sections_url, notice: 'Section was successfully destroyed.' }
+      format.html { redirect_to @group, notice: 'Section was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_section
-      @section = Section.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def section_params
-      params.require(:section).permit(:name, :group_id, :percentage, :total_percentage)
-    end
+  def set_group
+    @group = Group.find(params[:group_id])
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_section
+    @section = @group.sections.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def section_params
+    params.require(:section).permit(:name, :group_id, :percentage, :total_percentage)
+  end
 end

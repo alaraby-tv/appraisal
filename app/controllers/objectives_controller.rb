@@ -1,10 +1,12 @@
 class ObjectivesController < ApplicationController
+  before_action :set_group
+  before_action :set_section
   before_action :set_objective, only: [:show, :edit, :update, :destroy]
 
   # GET /objectives
   # GET /objectives.json
   def index
-    @objectives = Objective.all
+    @objectives = @section.objectives
   end
 
   # GET /objectives/1
@@ -14,7 +16,7 @@ class ObjectivesController < ApplicationController
 
   # GET /objectives/new
   def new
-    @objective = Objective.new
+    @objective = @section.objectives.build
   end
 
   # GET /objectives/1/edit
@@ -24,11 +26,11 @@ class ObjectivesController < ApplicationController
   # POST /objectives
   # POST /objectives.json
   def create
-    @objective = Objective.new(objective_params)
+    @objective = @section.objectives.build(objective_params)
 
     respond_to do |format|
       if @objective.save
-        format.html { redirect_to @objective, notice: 'Objective was successfully created.' }
+        format.html { redirect_to @group, notice: 'Objective was successfully created.' }
         format.json { render :show, status: :created, location: @objective }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class ObjectivesController < ApplicationController
   def update
     respond_to do |format|
       if @objective.update(objective_params)
-        format.html { redirect_to @objective, notice: 'Objective was successfully updated.' }
+        format.html { redirect_to @group, notice: 'Objective was successfully updated.' }
         format.json { render :show, status: :ok, location: @objective }
       else
         format.html { render :edit }
@@ -56,19 +58,27 @@ class ObjectivesController < ApplicationController
   def destroy
     @objective.destroy
     respond_to do |format|
-      format.html { redirect_to objectives_url, notice: 'Objective was successfully destroyed.' }
+      format.html { redirect_to @group, notice: 'Objective was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_objective
-      @objective = Objective.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def objective_params
-      params.require(:objective).permit(:name, :section_id, :percentage)
-    end
+  def set_group
+    @group = Group.find(params[:group_id])
+  end
+
+  def set_section
+    @section = @group.sections.find(params[:section_id])
+  end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_objective
+    @objective = @section.objectives.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def objective_params
+    params.require(:objective).permit(:name, :section_id, :percentage)
+  end
 end
