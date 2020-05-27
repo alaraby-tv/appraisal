@@ -5,6 +5,7 @@ class Objective < ApplicationRecord
   has_one :group, through: :section
 
   validates :name, :section, presence: true
+  validates_uniqueness_of :name, scope: :section
   validate :total_section_percentage_cannot_be_greater_than_specified
 
   def add_total_percentage_to_the_section
@@ -14,7 +15,7 @@ class Objective < ApplicationRecord
 
   def total_section_percentage_cannot_be_greater_than_specified
     if section.total_section_percentage + objective_percentage > section.section_percentage
-      errors.add(:objective_percentage, "can't be more than #{section.section_percentage - section.total_section_percentage}")
+      errors.add(:objective_percentage, "can't be more than #{section.section_percentage.to_i - section.total_section_percentage.to_i}")
     end
   end
 end

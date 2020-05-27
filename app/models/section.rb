@@ -4,6 +4,7 @@ class Section < ApplicationRecord
   has_many :objectives, inverse_of: :section, dependent: :destroy
 
   validates :name, :group, presence: true
+  validates_uniqueness_of :name, scope: :group
   validate :total_group_percentage_cannot_be_greater_than_a_hundred
 
   private
