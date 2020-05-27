@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_05_26_170054) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
-    t.float "total_percentage"
+    t.float "total_group_percentage", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2020_05_26_170054) do
   create_table "objectives", force: :cascade do |t|
     t.string "name"
     t.bigint "section_id"
-    t.float "percentage"
+    t.float "objective_percentage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["section_id"], name: "index_objectives_on_section_id"
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 2020_05_26_170054) do
   create_table "sections", force: :cascade do |t|
     t.string "name"
     t.bigint "group_id"
-    t.float "percentage"
-    t.float "total_percentage"
+    t.float "section_percentage"
+    t.float "total_section_percentage", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_sections_on_group_id"

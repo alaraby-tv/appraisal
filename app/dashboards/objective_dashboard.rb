@@ -10,9 +10,10 @@ class ObjectiveDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     section: Field::BelongsTo,
     evaluations: Field::HasMany,
+    group: Field::HasOne,
     id: Field::Number,
     name: Field::String,
-    percentage: Field::Number.with_options(decimals: 2),
+    objective_percentage: Field::Number.with_options(decimals: 2),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -26,7 +27,8 @@ class ObjectiveDashboard < Administrate::BaseDashboard
   id
   name
   section
-  evaluations
+  group
+  objective_percentage
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -36,7 +38,7 @@ class ObjectiveDashboard < Administrate::BaseDashboard
   name
   section
   evaluations
-  percentage
+  objective_percentage
   created_at
   ].freeze
 
@@ -46,7 +48,7 @@ class ObjectiveDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
   section
   name
-  percentage
+  objective_percentage
   evaluations
   ].freeze
 

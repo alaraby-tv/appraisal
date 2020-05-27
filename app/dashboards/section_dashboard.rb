@@ -12,8 +12,8 @@ class SectionDashboard < Administrate::BaseDashboard
     objectives: Field::HasMany,
     id: Field::Number,
     name: Field::String,
-    percentage: Field::Number.with_options(decimals: 2),
-    total_percentage: Field::Number.with_options(decimals: 2),
+    section_percentage: Field::Number.with_options(decimals: 2),
+    total_section_percentage: Field::Number.with_options(decimals: 2),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -27,6 +27,7 @@ class SectionDashboard < Administrate::BaseDashboard
   id
   name
   group
+  section_percentage
   objectives
   ].freeze
 
@@ -37,8 +38,8 @@ class SectionDashboard < Administrate::BaseDashboard
   name
   group
   objectives
-  percentage
-  total_percentage
+  section_percentage
+  total_section_percentage
   created_at
   ].freeze
 
@@ -48,7 +49,7 @@ class SectionDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
   group
   name
-  percentage
+  section_percentage
   objectives
   ].freeze
 

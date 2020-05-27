@@ -10,9 +10,10 @@ class GroupDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     users: Field::HasMany,
     sections: Field::HasMany,
+    objectives: Field::HasMany,
     id: Field::Number,
     name: Field::String,
-    total_percentage: Field::Number.with_options(decimals: 2),
+    total_group_percentage: Field::Number.with_options(decimals: 2),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -26,6 +27,7 @@ class GroupDashboard < Administrate::BaseDashboard
   id
   name
   sections
+  objectives
   users
   ].freeze
 
@@ -36,7 +38,7 @@ class GroupDashboard < Administrate::BaseDashboard
   name
   sections
   users
-  total_percentage
+  total_group_percentage
   created_at
   ].freeze
 

@@ -1,5 +1,4 @@
 class ObjectivesController < ApplicationController
-  before_action :set_group
   before_action :set_section
   before_action :set_objective, only: [:show, :edit, :update, :destroy]
 
@@ -27,7 +26,8 @@ class ObjectivesController < ApplicationController
   # POST /objectives.json
   def create
     @objective = @section.objectives.build(objective_params)
-
+    byebug
+    @objective.add_total_percentage_to_the_section
     respond_to do |format|
       if @objective.save
         format.html { redirect_to @group, notice: 'Objective was successfully created.' }
@@ -65,12 +65,8 @@ class ObjectivesController < ApplicationController
 
   private
 
-  def set_group
-    @group = Group.find(params[:group_id])
-  end
-
   def set_section
-    @section = @group.sections.find(params[:section_id])
+    @section = Section.find(params[:section_id])
   end
   # Use callbacks to share common setup or constraints between actions.
   def set_objective
@@ -79,6 +75,6 @@ class ObjectivesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def objective_params
-    params.require(:objective).permit(:name, :section_id, :percentage)
+    params.require(:objective).permit(:name, :section_id, :percentage, evaluation_ids: [])
   end
 end
