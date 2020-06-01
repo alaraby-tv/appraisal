@@ -42,7 +42,11 @@ class EvaluationsController < ApplicationController
   def update
     respond_to do |format|
       if @evaluation.update(evaluation_params)
-        format.html { redirect_to @evaluation, notice: 'Evaluation was successfully updated.' }
+        group = @evaluation.objective.group
+        user = @evaluation.user
+        total_score = Evaluation.where(user_id: user).sum('calculated_score')
+        user.update_attribute(:total_score, total_score)
+        format.html { redirect_to group, notice: 'Evaluation was successfully updated.' }
         format.json { render :show, status: :ok, location: @evaluation }
       else
         format.html { render :edit }
@@ -69,6 +73,6 @@ class EvaluationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def evaluation_params
-      params.fetch(:evaluation, {})
+      params.require(:evaluation).permit(:user_id, :objective_id, :score, :calculated_score)
     end
 end
