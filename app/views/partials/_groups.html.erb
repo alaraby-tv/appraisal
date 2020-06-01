@@ -1,5 +1,5 @@
-<ul class="nav nav-pills nav-justified">
-  <% Group.all.each do |group| %>
+<ul class="nav nav-tabs nav-justified">
+  <% Group.order(:created_at).each do |group| %>
     <li <% if params[:controller] == 'groups' && params[:id] == group.id.to_s %>class='active'<% end %>>
       <%= link_to group.name, group %>
     </li>
