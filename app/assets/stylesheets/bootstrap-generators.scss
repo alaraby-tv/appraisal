@@ -3,11 +3,11 @@
 @import "bootstrap.scss";
 
 body {
-  padding-top: $navbar-height + 10px;
+  padding-top: $navbar-height + 20px;
 }
 
 .page-header {
-  a.btn {
+  a.btn, .btn-group {
     float: right;
   }
 
@@ -20,4 +20,8 @@ input[type="radio"], input[type="checkbox"] {
   width: initial;
   height: initial;
   margin-top: 7px;
+}
+
+.number-field {
+  width: 80%;
 }
