@@ -69,6 +69,6 @@ class SectionDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(section)
-    "#{section.name}"
+    "#{section.group.name} - #{section.name}"
   end
 end

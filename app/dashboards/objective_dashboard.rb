@@ -27,7 +27,6 @@ class ObjectiveDashboard < Administrate::BaseDashboard
   id
   name
   section
-  group
   objective_percentage
   ].freeze
 
@@ -68,6 +67,6 @@ class ObjectiveDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(objective)
-    "#{objective.name}"
+    "#{objective.group.name} - #{objective.name}"
   end
 end

@@ -10,9 +10,12 @@ class UserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     group: Field::BelongsTo,
     evaluations: Field::HasMany,
+    objectives: Field::HasMany,
     id: Field::Number,
     email: Field::String,
     encrypted_password: Field::String,
+    password: Field::Password,
+    password_confirmation: Field::Password,
     name: Field::String,
     first_name: Field::String,
     last_name: Field::String,
@@ -34,6 +37,7 @@ class UserDashboard < Administrate::BaseDashboard
   id
   name
   group
+  objectives
   evaluations
   ].freeze
 
@@ -45,6 +49,7 @@ class UserDashboard < Administrate::BaseDashboard
   last_name
   email
   group
+  objectives
   evaluations
   total_score
   admin
@@ -59,8 +64,10 @@ class UserDashboard < Administrate::BaseDashboard
   first_name
   last_name
   email
-  encrypted_password
+  password
+  password_confirmation
   group
+  objectives
   evaluations
   total_score
   admin
