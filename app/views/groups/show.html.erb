@@ -1,7 +1,48 @@
+<%= render 'partials/groups' if user_signed_in? && current_user.admin %>
 <div class="page-header">
-  <%= link_to edit_group_path(@group), class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-pencil"></span>
-    Edit
-  <% end %>
+  <%= render 'partials/scale' %>
   <h2><%= @group.name %></h2>
+</div>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th></th>
+        <% @sections.each do |section| %>
+          <th class="text-center" colspan=<%= section.objectives.size %>><%= section.name %> <%= section.section_percentage %>%</th>
+        <% end %>
+        <th></th>
+      </tr>
+      <tr>
+        <th>Name</th>
+          <% @objectives.each do |objective| %>
+            <th>
+              <%= objective.name %>
+              <%= objective.objective_percentage %>%
+            </th>
+          <% end %>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <th><%= user.name %></th>
+          <% user.evaluations.order(:objective_id).each do |evaluation| %>
+            <% if evaluation.score && !current_user.admin %>
+              <td><%= evaluation.score %></td>
+            <% else %>
+              <td>
+                <%= form_for evaluation do |f| %>
+                  <%= f.number_field :score, required: true, class: 'number-field' %>
+                  <%= f.submit 'Save' %>
+                <% end %> 
+              </td>
+            <% end %>
+          <% end %>
+          <th><%= '%.2f' % user.total_score %></th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
