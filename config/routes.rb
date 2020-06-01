@@ -1,23 +1,26 @@
 Rails.application.routes.draw do
   namespace :admin do
-      resources :users
-      resources :evaluations
-      resources :groups
-      resources :objectives
-      resources :sections
+    resources :users
+    resources :evaluations
+    resources :groups
+    resources :objectives
+    resources :sections
 
-      root to: "users#index"
-    end
-  resources :groups do
-    resources :sections do
-      resources :objectives
-    end
+    root to: "users#index"
   end
-  root 'home#index'
+
   devise_for :users, skip: [:sessions, :registrations]
   devise_scope :user do
     authenticated :user do
       root 'home#index', as: :authenticated_root
+      shallow do 
+        resources :evaluations
+        resources :groups do
+          resources :sections do
+            resources :objectives
+          end
+        end
+      end
     end
 
     root 'devise/sessions#new'
