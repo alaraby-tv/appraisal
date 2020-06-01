@@ -26,7 +26,7 @@ class SectionsController < ApplicationController
   # POST /sections.json
   def create
     @section = @group.sections.build(section_params)
-
+    @section.add_total_percentage_to_the_group
     respond_to do |format|
       if @section.save
         format.html { redirect_to @group, notice: 'Section was successfully created.' }
