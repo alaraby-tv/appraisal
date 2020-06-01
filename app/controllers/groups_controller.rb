@@ -10,6 +10,9 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @sections = @group.sections.order(created_at: :asc)
+    @objectives = @group.objectives.order(created_at: :asc)
+    @users = current_user.admin ? @group.users : [current_user]
   end
 
   # GET /groups/new
