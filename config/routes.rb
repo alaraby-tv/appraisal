@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     authenticated :user do
       root 'home#index', as: :authenticated_root
+      get '/contact' => 'home#contact'
       shallow do 
         resources :evaluations
         resources :groups do
