@@ -1,9 +1,10 @@
 class Section < ApplicationRecord
   before_save :update_total_percentage_of_the_group
+  before_destroy :deduct_total_percentage_of_the_group
   belongs_to :group, inverse_of: :sections
   has_many :objectives, inverse_of: :section, dependent: :destroy
 
-  validates :name, :group, presence: true
+  validates :name, :section_percentage, :group, presence: true
   validates_uniqueness_of :name, scope: :group
   validate :total_group_percentage_cannot_be_greater_than_a_hundred
   validate :section_percentage_cannot_be_lower_than_total_percentage
@@ -17,6 +18,11 @@ class Section < ApplicationRecord
 
   def update_total_percentage_of_the_group
     updated_group_percentage = group.total_group_percentage + new_percentage
+    group.update_attribute(:total_group_percentage, updated_group_percentage)
+  end
+
+  def deduct_total_percentage_of_the_group
+    updated_group_percentage = group.total_group_percentage - section_percentage
     group.update_attribute(:total_group_percentage, updated_group_percentage)
   end
 
