@@ -21,6 +21,7 @@ gem 'devise'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem 'record_tag_helper', '~> 1.0'
 gem 'administrate'
+gem 'figaro'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
